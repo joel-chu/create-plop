@@ -10,7 +10,7 @@ _Why you want to use it_ I been using plop for 5 years now, it's been my number 
 for quickly create generator for templates for different kind of teams. It's been battery test on
 Angular / React (preact) / Vue 2~3 Projects. Here are a few reasons why I use it.
 
-### 1. Hackable anytime
+### 1. Hackability
 
 Traditional CLI tool is like a blackbox, you really can't do anything with it; unless you take the source and hack it.
 With `plopfile`, that's the source of your cli! And you (or your team) can add feature as needed.
@@ -45,7 +45,9 @@ for start, and will add more framework in later release.
 
 ## Tech Requirement
 
-The tool is mark as `type: module` and written in `ESM`. It's develop on [POP_OS 22.04](https://pop.system76.com) and Node.js 16-lts
+The tool is mark as `type: module` and written in `ESM`.
+It's develop on [Pop!_OS 22.04](https://pop.system76.com) and Node.js 16-lts,
+using [pnpm](https://pnpm.io) to manage packages.
 
 ---
 
