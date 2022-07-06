@@ -2,7 +2,8 @@
   "name": "create-plop",
   "version": "0.0.1",
   "description": "Quick scarfold a project with plop.js integration",
-  "main": "index.js",
+  "main": "index.mjs",
+  "type": "module",
   "scripts": {
     "test": "ava"
   },
