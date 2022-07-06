@@ -1,14 +1,14 @@
 # create-plop
 
-> Quickly scarfold templates with [plop.js](plop-js.com/) integration
+> Quickly scarfold templates with [plop.js](https://plopjs.com/) integration
 
 ## Introduction
 
-This is tool that generate template with [plop](plop-js.com) that actually built with plop :)
+This is tool that generate template with [plop](https://plopjs.com) that actually built with plop :)
 
 _Why you want to use it_ I been using plop for 5 years now, it's been my number one go-to tool
 for quickly create generator for templates for different kind of teams. It's been battery test on
-Angular / React (preact) / Vue 2~3 Projects. Here are a few reasons why I use it.
+Angular.js / React (preact) / Vue 2~3 Projects. Here are a few reasons why I use it.
 
 ### 1. Hackability
 
