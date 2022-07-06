@@ -1,0 +1,32 @@
+{
+  "name": "create-plop",
+  "version": "0.0.1",
+  "description": "Quick scarfold a project with plop.js integration",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joel-chu/create-plop.git"
+  },
+  "keywords": [
+    "plop",
+    "node",
+    "project",
+    "scarfold",
+    "javascript"
+  ],
+  "author": "Joel Chu <joelchu@foxmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/joel-chu/create-plop/issues"
+  },
+  "homepage": "https://github.com/joel-chu/create-plop#readme",
+  "dependencies": {
+    "plop": "^3.1.1"
+  },
+  "devDependencies": {
+    "ava": "^4.3.0"
+  }
+}
