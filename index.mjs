@@ -4,7 +4,7 @@ import minimist from 'minimist'
 import { Plop, run } from 'plop'
 import debugFn from 'debug'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
-import { isTest, isDev } from './src/helpers/constants.mjs'
+import { isTest, isDev, fakeDest } from './src/helpers/constants.mjs'
 
 const debug = debugFn('create-plop:index')
 const args = process.argv.slice(2)
@@ -14,7 +14,8 @@ const __dirname = getDirname(import.meta.url)
 debug('argv', argv)
 
 // The reason we set it here is because inside the plop have this prop
-const dest = isTest || isDev ? join(__dirname, 'tests', 'fixtures', 'dev') : process.cwd()
+let dest = isTest || isDev ? join(__dirname, 'tests', 'fixtures', 'dev') : process.cwd()
+dest = fakeDest ? join(dest, fakeDest) : dest
 
 Plop.prepare({
   cwd: argv.cwd,
@@ -22,7 +23,7 @@ Plop.prepare({
   preload: argv.preload || [],
   completion: argv.completion
 }, env => Plop.execute(env, (env) => {
-  debug('env', env)
+  // debug('env', env)
   const options = {
     ...env,
     dest

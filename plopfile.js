@@ -4,7 +4,8 @@ import { join } from 'node:path'
 import fsx from 'fs-extra'
 import debugFn from 'debug'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
-import { PKG_FILE } from './src/helpers/constants.mjs'
+import { checkPkgDeps } from './src/helpers/check-pkg-deps.mjs'
+import { PKG_FILE, isTest, isDev } from './src/helpers/constants.mjs'
 // import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
 const __dirname = getDirname(import.meta.url)
@@ -39,7 +40,9 @@ export default function (
   debug('dest', dest)
   const pkgJsonFile = join(dest, PKG_FILE)
   const pkgJson = fsx.existsSync(pkgJsonFile) ? fsx.readJsonSync(pkgJsonFile) : {}
-  debug('pkgJson', pkgJson)
+  const deps = checkPkgDeps(pkgJson)
+  debug('deps', deps)
+  // debug('pkgJson', pkgJsonFile, pkgJson)
   // create the generator
   // @TODO add more framework support next
   plop.setGenerator('createPlop', {
