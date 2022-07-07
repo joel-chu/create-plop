@@ -8,7 +8,7 @@ import { getConfigProp } from './get-config-prop.mjs'
 export async function findPlopfile (pathToFiles, options = {}) {
   return new Promise((resolve, reject) => {
     // @TODO should we clean that pathToFiles via dirname
-    glob(`${pathToFiles}/*.js`, options, function (er, files) {
+    glob(`${pathToFiles}/*.{mjs, js}`, options, function (er, files) {
       if (er) {
         return reject(er)
       }

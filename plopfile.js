@@ -5,7 +5,8 @@ import fsx from 'fs-extra'
 import debugFn from 'debug'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { checkPkgDeps } from './src/helpers/check-pkg-deps.mjs'
-import { PKG_FILE, isTest, isDev } from './src/helpers/constants.mjs'
+import { PKG_FILE } from './src/helpers/constants.mjs'
+import { tmpContinue } from './src/plop/prompts.mjs'
 // import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
 const __dirname = getDirname(import.meta.url)
@@ -41,67 +42,19 @@ export default function (
   const pkgJsonFile = join(dest, PKG_FILE)
   const pkgJson = fsx.existsSync(pkgJsonFile) ? fsx.readJsonSync(pkgJsonFile) : {}
   const deps = checkPkgDeps(pkgJson)
-  debug('deps', deps)
-  // debug('pkgJson', pkgJsonFile, pkgJson)
-  // create the generator
-  // @TODO add more framework support next
+  if (deps.vue && deps.vue !== 2) {
+    throw new Error(`We only support Vue.2 at the moment (you have v.${deps.vue}). Please check back in later release`)
+  }
+  // debug('deps', deps)
+  // main
   plop.setGenerator('createPlop', {
     description: 'create-plop main',
-    prompts: [{
-      type: 'input',
-      name: 'name',
-      message: 'Project Name'
-      // validate: spaceInValue // @BUG this is broken!
-    }, {
-      type: 'list',
-      name: 'lang',
-      message: 'Select development langauge',
-      choices: [
-        { name: 'Javascript', value: 'js' },
-        { name: 'Typescript', value: 'ts' }
-      ],
-      default: 'js'
-    }],
+    prompts: [
+      tmpContinue
+    ],
     actions: function (answers) {
       debug('actions answers', answers)
     }
-  })
-
-  // create custom actions
-  plop.setActionType('copyTemplates', function (answers, config, plop) {
-    const { name, lang } = answers
-    const d = lang === 'js' ? 'ssr-vue' : 'ssr-vue-ts'
-
-    return fs.copy(
-      join(tplDir, d),
-      join(destDir, name),
-      {
-        overwrite: false,
-        errorOnExist: true
-      }
-    ).then(() => `Project ${name} created`)
-  })
-
-  // setting up the package.json
-  plop.setActionType('setupPackageJson', function (answers, config, plop) {
-    console.log(answers)
-    const { name } = answers
-    const pkg = fs.readJsonSync(join(tplDir, 'package.tpl.json'))
-    pkg.name = name
-    fs.writeJsonSync(join(destDir, name, 'package.json'), pkg, { spaces: 2 })
-
-    return 'package.json created'
-  })
-
-  plop.setActionType('copyVeloceConfig', function (answers) {
-    return fs.copy(
-      join(tplDir, 'veloce.config.tpl.js'),
-      join(destDir, answers.name, 'veloce.config.js')
-    )
-  })
-
-  plop.setActionType('justEndMessage', function () {
-    return 'Setup completed, now please run "npm install" then run "npm run dev"'
   })
 
   // next we will try to import plopfile that is written by the developer
