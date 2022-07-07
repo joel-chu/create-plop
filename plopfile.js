@@ -54,6 +54,16 @@ export default function (
     ],
     actions: function (answers) {
       debug('actions answers', answers)
+      const { proceed } = answers
+      if (!proceed) {
+        return [function () { return 'Bye' }]
+      }
+      // copy over the whole folder content
+      return [
+        function () {
+          return fsx.copy(join(tplDir, 'vue2'), dest)
+        }
+      ]
     }
   })
 
