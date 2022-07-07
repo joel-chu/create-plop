@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "ava",
-    "crt": "node ./index.mjs"
+    "crt": "DEBUG=create-plop:* NODE_ENV=dev node ./index.mjs"
   },
   "repository": {
     "type": "git",

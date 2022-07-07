@@ -10,6 +10,7 @@ import { PKG_FILE } from './src/helpers/constants.mjs'
 const __dirname = getDirname(import.meta.url)
 const debug = debugFn('create-plop:plopfile')
 const tplDir = join(__dirname, 'src', 'templates')
+
 // const isTest = process.env.NODE_ENV === 'test'
 // const destDir = isTest ? join(__dirname, 'tests', 'fixtures') : process.cwd()
 
@@ -36,7 +37,8 @@ export default function (
 ) {
   const dest = plop.getDestBasePath()
   debug('dest', dest)
-  const pkgJson = fsx.readJsonSync(join(dest, PKG_FILE))
+  const pkgJsonFile = join(dest, PKG_FILE)
+  const pkgJson = fsx.existsSync(pkgJsonFile) ? fsx.readJsonSync(pkgJsonFile) : {}
   debug('pkgJson', pkgJson)
   // create the generator
   // @TODO add more framework support next
