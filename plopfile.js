@@ -2,11 +2,12 @@
 // plop file for all the commands
 import { join } from 'node:path'
 import fs from 'fs-extra'
+import debugFn from 'debug'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
 const __dirname = getDirname(import.meta.url)
-
+const debug = debugFn('create-plop:plopfile')
 const tplDir = join(__dirname, 'templates')
 const isTest = process.env.NODE_ENV === 'test'
 const destDir = isTest ? join(__dirname, 'tests', 'fixtures') : process.cwd()
@@ -19,6 +20,30 @@ export default function (
   /** @type {import('plop').NodePlopAPI} */
   plop
 ) {
+  // create the generator
+  // @TODO add more framework support next
+  plop.setGenerator('base', {
+    description: 'Hello world',
+    prompts: [{
+      type: 'input',
+      name: 'name',
+      message: 'Project Name'
+      // validate: spaceInValue // @BUG this is broken!
+    }, {
+      type: 'list',
+      name: 'lang',
+      message: 'Select development langauge',
+      choices: [
+        { name: 'Javascript', value: 'js' },
+        { name: 'Typescript', value: 'ts' }
+      ],
+      default: 'js'
+    }],
+    actions: function (answers) {
+      debug('actions answers', answers)
+    }
+  })
+
   // create custom actions
   plop.setActionType('copyTemplates', function (answers, config, plop) {
     const { name, lang } = answers
@@ -56,40 +81,7 @@ export default function (
     return 'Setup completed, now please run "npm install" then run "npm run dev"'
   })
 
-  // create the generator
-  // @TODO add more framework support next
-  plop.setGenerator('base', {
-    description: 'Hello world',
-    prompts: [{
-      type: 'input',
-      name: 'name',
-      message: 'Project Name'
-      // validate: spaceInValue // @BUG this is broken!
-    }, {
-      type: 'list',
-      name: 'lang',
-      message: 'Select development langauge',
-      choices: [
-        { name: 'Javascript', value: 'js' },
-        { name: 'Typescript', value: 'ts' }
-      ],
-      default: 'js'
-    }],
-    actions: [
-      {
-        type: 'copyTemplates'
-      },
-      {
-        type: 'setupPackageJson'
-      },
-      {
-        type: 'copyVeloceConfig'
-      },
-      {
-        type: 'justEndMessage'
-      }
-    ]
-  })
+
   // next we will try to import plopfile that is written by the developer
   // then import it here
   importPlopfile(projectRoot, plop)

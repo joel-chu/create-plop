@@ -2,12 +2,15 @@
 import { join } from 'node:path'
 import minimist from 'minimist'
 import { Plop, run } from 'plop'
+import debugFn from 'debug'
+import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 
-import getDirname from '@jsonql/utils/dist/get-dirname.js'
-
+const debug = debugFn('create-plop:index')
 const args = process.argv.slice(2)
 const argv = minimist(args)
 const __dirname = getDirname(import.meta.url)
+
+debug('argv', argv)
 
 const dest = process.env.NODE_ENV === 'test' ? join(__dirname, 'tests', 'fixtures') : process.cwd()
 
