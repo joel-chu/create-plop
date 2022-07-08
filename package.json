@@ -37,6 +37,14 @@
   "devDependencies": {
     "ava": "^4.3.0"
   },
+  "ava": {
+    "files": [
+      "tests/**/*.test.mjs"
+    ],
+    "verbose": true,
+    "tap": false,
+    "failFast": true
+  },
   "bin": {
     "create-plop": "./index.mjs"
   }

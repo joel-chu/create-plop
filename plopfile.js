@@ -60,8 +60,8 @@ export default function (
       }
       // copy over the whole folder content
       return [
-        function () {
-          return fsx.copy(join(tplDir, 'vue2'), dest)
+        async function () {
+          return await fsx.copy(join(tplDir, 'vue2'), dest)
         }
       ]
     }
