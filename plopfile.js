@@ -3,6 +3,7 @@
 import { join } from 'node:path'
 import fsx from 'fs-extra'
 import debugFn from 'debug'
+import { extend } from '@jsonql/utils'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { checkPkgDeps } from './src/helpers/check-pkg-deps.mjs'
 import { PKG_FILE } from './src/helpers/constants.mjs'
@@ -12,6 +13,7 @@ import { tmpContinue } from './src/plop/prompts.mjs'
 const __dirname = getDirname(import.meta.url)
 const debug = debugFn('create-plop:plopfile')
 const tplDir = join(__dirname, 'src', 'templates')
+const ourPkgJson = fsx.readJsonSync(join(__dirname, 'package.json'))
 
 // const isTest = process.env.NODE_ENV === 'test'
 // const destDir = isTest ? join(__dirname, 'tests', 'fixtures') : process.cwd()
@@ -60,8 +62,17 @@ export default function (
       }
       // copy over the whole folder content
       return [
-        async function () {
+        async function copyFiles () {
           return await fsx.copy(join(tplDir, 'vue2'), dest)
+        },
+        async function updatePackageJson () {
+          // create a copy first
+          await fsx.copy(pkgJsonFile, pkgJsonFile.replace('.json', '-org.json'))
+
+          pkgJson.dependencies = extend(pkgJson.dependencies, { plop: ourPkgJson.dependencies.plop })
+          pkgJson.scripts = extend(pkgJson.scripts, { plop: 'plop' })
+
+          return await fsx.writeJson(pkgJsonFile, pkgJson, { spaces: 2 }).then(() => 'All done! Just run `npm run plop`')
         }
       ]
     }
