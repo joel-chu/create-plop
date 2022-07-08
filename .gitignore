@@ -104,4 +104,4 @@ dist
 .tern-port
 
 # don't include the following in the git - for dev only
-tests/fixtures/dev/
+# tests/fixtures/dev/ (get rip of the node_modules folder and reduce the size)

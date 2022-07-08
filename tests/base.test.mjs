@@ -1,3 +1,8 @@
 import test from 'ava'
 
-test.todo('It should able to create the base plop file strucure')
+
+test('It should able to answer yes and copy over the folder structure', async t => {
+
+
+
+})
