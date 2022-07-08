@@ -7,7 +7,8 @@
   "scripts": {
     "test": "ava",
     "crt": "DEBUG=create-plop:* NODE_ENV=dev node ./index.mjs",
-    "dev": "FAKE_DEST=vue2 pnpm crt"
+    "dev": "FAKE_DEST=vue2 pnpm crt",
+    "prepublishOnly": "pnpm test",
   },
   "repository": {
     "type": "git",
