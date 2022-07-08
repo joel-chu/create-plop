@@ -6,8 +6,8 @@
 
 This is tool that generate template with [plop](https://plopjs.com) that actually built with plop :)
 
-_Why you want to use it_ I been using plop for 5 years now, it's been my number one go-to tool
-for quickly create generator for templates for different kind of teams. It's been battery test on
+_Why you want to use it_ I been using plop for many years now, it's been my number one go-to tool
+for quickly create generator for templates for different kind of teams. It's been battle field test on
 Angular.js / React (preact) / Vue 2~3 Projects. Here are a few reasons why I use it.
 
 ### 1. Hackability
@@ -40,7 +40,11 @@ Using the `@latest` will get you a fresh version (because we are upgrading it ra
 
 Just following the instruction.
 
-We support Vue (v.3) with [Vuex](https://vuex.vuejs.org/) or [Pinia](https://pinia.vuejs.org/)
+---
+
+**V0.1.X - Ony support Vue.2 and Vuex at the moment, we will quickly porting the code and later release.**
+
+@TODO We support Vue (v.3) with [Vuex](https://vuex.vuejs.org/) or [Pinia](https://pinia.vuejs.org/)
 for start, and will add more framework in later release.
 
 ## Tech Requirement

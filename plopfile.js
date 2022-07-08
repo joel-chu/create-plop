@@ -6,7 +6,7 @@ import debugFn from 'debug'
 import { extend } from '@jsonql/utils'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { checkPkgDeps } from './src/helpers/check-pkg-deps.mjs'
-import { PKG_FILE } from './src/helpers/constants.mjs'
+import { PKG_FILE, USERGUIDE } from './src/helpers/constants.mjs'
 import { tmpContinue } from './src/plop/prompts.mjs'
 // import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
@@ -72,7 +72,11 @@ export default function (
           pkgJson.dependencies = extend(pkgJson.dependencies, { plop: ourPkgJson.dependencies.plop })
           pkgJson.scripts = extend(pkgJson.scripts, { plop: 'plop' })
 
-          return await fsx.writeJson(pkgJsonFile, pkgJson, { spaces: 2 }).then(() => 'All done! Just run `npm run plop`')
+          return fsx.writeJson(pkgJsonFile, pkgJson, { spaces: 2 })
+        },
+        async function copyUserGuide () {
+          return fsx.copy(join(tplDir, USERGUIDE), join(dest, USERGUIDE))
+            .then(() => 'All done! Just run `npm run plop`')
         }
       ]
     }

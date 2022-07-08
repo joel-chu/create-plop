@@ -4,6 +4,7 @@ import { spawn } from 'node:child_process'
 import fsx from 'fs-extra'
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { promise } from '@jsonql/utils'
+import { USERGUIDE } from '../src/helpers/constants.mjs'
 
 const __dirname = getDirname(import.meta.url)
 const target = join(__dirname, 'fixtures', 'dev', 'vue2')
@@ -19,6 +20,7 @@ test.after(async () => {
   // clean up the json files as well
   await fsx.copy(orgJsonFile, jsonFile)
   await fsx.remove(orgJsonFile)
+  await fsx.remove(join(target, USERGUIDE))
 })
 
 test('It should able to answer yes and copy over the folder structure', async t => {

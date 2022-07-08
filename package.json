@@ -1,6 +1,6 @@
 {
   "name": "create-plop",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Quick scarfold a project with plop.js integration",
   "main": "index.mjs",
   "type": "module",
