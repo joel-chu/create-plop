@@ -58,7 +58,7 @@ export default function (
       debug('actions answers', answers)
       const { proceed } = answers
       if (!proceed) {
-        return [function () { return 'Bye' }]
+        return [function () { return 'Bye bye' }]
       }
       // copy over the whole folder content
       return [
