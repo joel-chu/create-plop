@@ -2,6 +2,10 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from './components/HelloWorld.vue'
+import TestBase from './components/TestBase/TestBase.vue'
+
+const x1 = 100
+
 </script>
 
 <template>
@@ -14,6 +18,7 @@ import HelloWorld from './components/HelloWorld.vue'
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <TestBase x="this.x1" />
 </template>
 
 <style scoped>
