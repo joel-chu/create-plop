@@ -27,16 +27,15 @@ test('It should able to answer yes and copy over the folder structure', async t 
   t.plan(3)
   return promise((resolve) => {
     const ls = spawn('pnpm', ['dev', 'tmp', 'Y'])
-    ls.stdout.on('data', (data) => {
+    /* ls.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`)
     })
-
     ls.stderr.on('data', (data) => {
       console.error(`stderr: ${data}`)
     })
-
+    */
     ls.on('close', (code) => {
-      console.log(`child process exited with code ${code}`)
+      // console.log(`child process exited with code ${code}`)
       setTimeout(() => {
         t.true(fsx.existsSync(plopFile))
         t.true(fsx.existsSync(tplDir))
