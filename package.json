@@ -34,6 +34,7 @@
   "homepage": "https://github.com/joel-chu/create-plop#readme",
   "dependencies": {
     "@jsonql/utils": "^1.2.1",
+    "cheerio": "1.0.0-rc.12",
     "debug": "^4.3.4",
     "fs-extra": "^10.1.0",
     "glob": "^8.0.3",

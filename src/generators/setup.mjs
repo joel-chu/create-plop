@@ -11,8 +11,24 @@ export default function setupGenerator (config = {}) {
   return function (plop) {
     plop.setGenerator('initGenerator', {
       description: 'Initial setup',
-      prompts: [],
-      actions: []
+      prompts: [
+        {
+          type: 'list',
+          name: 'framework',
+          list: ['vue'],
+          default: 'vue'
+        },
+        {
+          type: 'list',
+          name: 'version',
+          list: [2, 3],
+          default: 3
+        }
+      ],
+      actions: function (answers) {
+        console.log(answers)
+        return 'do nothing'
+      }
     })
   }
 }

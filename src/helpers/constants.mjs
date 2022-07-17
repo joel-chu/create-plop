@@ -1,6 +1,6 @@
 // where we store the templates etc on the project
 export const BASE_DIR_NAME = '.plop'
-export const CONFIG_FILE_NAME = 'create-plop.json'
+export const CONFIG_FILE_NAME = '.create-plop.config.json'
 export const PKG_FILE = 'package.json'
 export const USERGUIDE = 'userguide.md'
 // dynamic varaible therefore using camel case
