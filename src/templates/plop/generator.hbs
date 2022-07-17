@@ -1,7 +1,7 @@
 // {{name}} generator
-export default function {{name | camelCase}}Generator (config = {}) {
+export default function {{camelCase name}}Generator (config = {}) {
   return function (plop) {
-    plop.setGenerator('{{name | camelCase}}', {
+    plop.setGenerator('{{camelCase name}}', {
       description: 'Initial setup',
       prompts: [],
       actions: []
