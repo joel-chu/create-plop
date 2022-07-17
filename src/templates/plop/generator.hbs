@@ -1,0 +1,10 @@
+// {{name}} generator
+export default function {{name | camelCase}}Generator (config = {}) {
+  return function (plop) {
+    plop.setGenerator('{{name | camelCase}}', {
+      description: 'Initial setup',
+      prompts: [],
+      actions: []
+    })
+  }
+}
