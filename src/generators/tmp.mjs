@@ -18,8 +18,8 @@ export default function tmpGenerator (plop, config) {
     throw new Error(`We only support Vue.2 at the moment (you have v.${deps.vue}). Please check back in later release`)
   }
 
-  plop.setGenerator('createPlop', {
-    description: 'create-plop main',
+  plop.setGenerator('tmp', {
+    description: 'tmp generator',
     prompts: [
       tmpContinue
     ],

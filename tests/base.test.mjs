@@ -26,7 +26,7 @@ test.after(async () => {
 test('It should able to answer yes and copy over the folder structure', async t => {
   t.plan(3)
   return promise((resolve) => {
-    const ls = spawn('pnpm', ['dev', 'Y'])
+    const ls = spawn('pnpm', ['dev', 'tmp', 'Y'])
     ls.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`)
     })
