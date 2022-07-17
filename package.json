@@ -4,6 +4,11 @@
   "description": "Quick scarfold a project with plop.js integration",
   "main": "index.mjs",
   "type": "module",
+  "files": [
+    "src",
+    "index.mjs",
+    "plopfile.js"
+  ],
   "scripts": {
     "test": "ava",
     "crt": "DEBUG=create-plop:* NODE_ENV=dev node ./index.mjs",
