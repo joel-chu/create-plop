@@ -16,16 +16,7 @@ test('Should able to create genrator with the generator', async t => {
   t.plan(1)
   return promise((resolve) => {
     const ls = spawn('pnpm', ['dev', 'createGenerator', '"hello world"', 'whatever'])
-    ls.stdout.on('data', (data) => {
-      console.log(`stdout: ${data}`)
-    })
-
-    ls.stderr.on('data', (data) => {
-      console.error(`stderr: ${data}`)
-    })
-
     ls.on('close', (code) => {
-      console.log(`child process exited with code ${code}`)
       setTimeout(() => {
         t.true(fsx.existsSync(expectedFile))
         resolve(true)
