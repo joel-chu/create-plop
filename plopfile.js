@@ -5,6 +5,7 @@ import fsx from 'fs-extra'
 import debugFn from 'debug'
 // import generators
 import tmpGenerator from './src/generators/tmp.mjs'
+import createGenerator from './src/generators/create-generator.mjs'
 
 import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
 import { PKG_FILE } from './src/helpers/constants.mjs'
@@ -46,7 +47,10 @@ export default function (
   const config = { dest, pkgJsonFile, pkgJson, tplDir, ourPkgJson, __dirname }
   // debug('deps', deps)
   // main
-  tmpGenerator(config)(plop)
+  const generators = [tmpGenerator, createGenerator]
+  generators.forEach(fn => {
+    fn(plop, config)
+  })
 
   // next we will try to import plopfile that is written by the developer
   // then import it here
