@@ -10,7 +10,7 @@ What do we need to know:
 import { createConfig } from '../helpers/config.mjs'
 
 export default function setupGenerator (plop, config) {
-  const { pwd, __dirname } = config
+  const { dest, __dirname } = config
 
   plop.setGenerator('setupGenerator', {
     description: 'Initial setup',
@@ -52,8 +52,7 @@ export default function setupGenerator (plop, config) {
       // copy over templates
       console.log(answers)
       return [
-        () => createConfig(pwd, answers),
-        
+        () => createConfig(dest, answers)
       ]
     }
   })

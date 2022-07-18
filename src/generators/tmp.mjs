@@ -4,7 +4,7 @@ import debugFn from 'debug'
 import { checkPkgDeps } from '../helpers/check-pkg-deps.mjs'
 import { tmpContinue } from '../plop/prompts.mjs'
 
-import { copyTpl, copyUserGuide } from '../plop/copy-tpl.mjs'
+import { copyTpl, copyUserGuide } from '../plop/copy-actions.mjs'
 import { updateProjectPkgJson } from '../plop/update-pkg-action.mjs'
 
 const debug = debugFn('create-plop:tmp-generator')

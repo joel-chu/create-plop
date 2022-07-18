@@ -8,8 +8,8 @@ import { PKG_FILE } from './src/helpers/constants.mjs'
 // import generators
 import tmpGenerator from './src/generators/tmp.mjs'
 import createGenerator from './src/generators/create-generator.mjs'
-import setupGenerator from './src/generators/setup.mjs'
-const generators = [setupGenerator, tmpGenerator, createGenerator]
+// import setupGenerator from './src/generators/setup.mjs'
+const generators = [/* setupGenerator, */tmpGenerator, createGenerator]
 // import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
 const __dirname = getDirname(import.meta.url)
@@ -51,8 +51,7 @@ export default function (
     ourPkgJson,
     tplDir,
     __dirname,
-    dest,
-    pwd: process.pwd()
+    dest
   }
 
   generators.forEach(fn => {
