@@ -3,12 +3,13 @@
 import { join } from 'node:path'
 import fsx from 'fs-extra'
 import debugFn from 'debug'
+import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
+import { PKG_FILE } from './src/helpers/constants.mjs'
 // import generators
 import tmpGenerator from './src/generators/tmp.mjs'
 import createGenerator from './src/generators/create-generator.mjs'
-
-import { getDirname } from '@jsonql/utils/dist/get-dirname.js'
-import { PKG_FILE } from './src/helpers/constants.mjs'
+import setupGenerator from './src/generators/setup.mjs'
+const generators = [setupGenerator, tmpGenerator, createGenerator]
 // import { importPlopfile } from './src/import-plopfile.mjs'
 // import { spaceInValue } from './src/common.mjs'
 const __dirname = getDirname(import.meta.url)
@@ -47,7 +48,7 @@ export default function (
   const config = { dest, pkgJsonFile, pkgJson, tplDir, ourPkgJson, __dirname }
   // debug('deps', deps)
   // main
-  const generators = [tmpGenerator, createGenerator]
+
   generators.forEach(fn => {
     fn(plop, config)
   })

@@ -7,28 +7,26 @@ What do we need to know:
 4. What test framework (Support Jest, ava, and Vitest soon follow)
 
 */
-export default function setupGenerator (config = {}) {
-  return function (plop) {
-    plop.setGenerator('initGenerator', {
-      description: 'Initial setup',
-      prompts: [
-        {
-          type: 'list',
-          name: 'framework',
-          list: ['vue'],
-          default: 'vue'
-        },
-        {
-          type: 'list',
-          name: 'version',
-          list: [2, 3],
-          default: 3
-        }
-      ],
-      actions: function (answers) {
-        console.log(answers)
-        return 'do nothing'
+export default function setupGenerator (plop, config = {}) {
+  plop.setGenerator('initGenerator', {
+    description: 'Initial setup',
+    prompts: [
+      {
+        type: 'list',
+        name: 'framework',
+        choices: ['vue'],
+        default: 'vue'
+      },
+      {
+        type: 'list',
+        name: 'version',
+        choices: [2, 3],
+        default: 1 // use the index when its number
       }
-    })
-  }
+    ],
+    actions: function (answers) {
+      console.log(answers)
+      return 'do nothing'
+    }
+  })
 }
