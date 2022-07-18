@@ -7,8 +7,11 @@ What do we need to know:
 4. Using which store
 5. What test framework (Support Jest, ava, and Vitest soon follow)
 */
+import { createConfig } from '../helpers/config.mjs'
 
-export default function setupGenerator (plop, config = {}) {
+export default function setupGenerator (plop, config) {
+  const { pwd, __dirname } = config
+
   plop.setGenerator('setupGenerator', {
     description: 'Initial setup',
     prompts: [
@@ -46,8 +49,12 @@ export default function setupGenerator (plop, config = {}) {
       }
     ],
     actions: function (answers) {
+      // copy over templates
       console.log(answers)
-      return 'do nothing'
+      return [
+        () => createConfig(pwd, answers),
+        
+      ]
     }
   })
 }
