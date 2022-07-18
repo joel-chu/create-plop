@@ -1,15 +1,16 @@
 <script setup>
 export default {
+  props: {
+    msg: String
+  },
   data() {
-    return {
-      msg: ''
-    }
+    return {}
   }
 }
 </script>
 
 <template>
-
+  <div>{{dcurly true}}msg{{dcurly}}</div>
 </template>
 
 <style scoped>

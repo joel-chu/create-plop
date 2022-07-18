@@ -26,7 +26,7 @@ export default defineComponent({
   <div>y: {{y}}</div>
   <div>{{count}}</div>
   <button @click="++count">ADD</button>
-  <AnywhereButton v-on:anywhere-click="message='anywhere just clicked'" />
+  <AnywhereButton v-on:anywhere-click="message='anywhere just clicked'" msg="just saying ..." />
 </template>
 
 <style scoped>

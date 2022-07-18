@@ -1,15 +1,23 @@
-<script setup>
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: '{{pascalCase compName}}',
+  components: {}
+  props: {
+    msg: String
+  },
   data() {
-    return {
-      msg: ''
-    }
+    return {}
+  },
+  methods: {},
+  setup(props, ctx) {
+
   }
-}
+})
 </script>
 
 <template>
-
+  <div>{{dcurly true}}msg{{dcurly}}</div>
 </template>
 
 <style scoped>
