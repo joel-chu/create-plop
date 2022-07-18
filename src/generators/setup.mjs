@@ -3,12 +3,13 @@
 What do we need to know:
 1. framework (only Vue at the moment) stub this with a message
 2. version (2 or 3)
-3. Using which store
-4. What test framework (Support Jest, ava, and Vitest soon follow)
-
+3. Lang TS or ESM
+4. Using which store
+5. What test framework (Support Jest, ava, and Vitest soon follow)
 */
+
 export default function setupGenerator (plop, config = {}) {
-  plop.setGenerator('initGenerator', {
+  plop.setGenerator('setupGenerator', {
     description: 'Initial setup',
     prompts: [
       {
@@ -22,6 +23,26 @@ export default function setupGenerator (plop, config = {}) {
         name: 'version',
         choices: [2, 3],
         default: 1 // use the index when its number
+      },
+      {
+        type: 'list',
+        name: 'lang',
+        choices: ['Typescript', 'Javascript'],
+        default: 'Typescript'
+      },
+      {
+        type: 'list',
+        name: 'store',
+        choices: ['vuex', 'pinia', 'none'],
+        default: function (answers) {
+          return answers.version === 2 ? 'vuex' : 'pinia'
+        }
+      },
+      {
+        type: 'list',
+        name: 'test',
+        choices: ['jest', 'ava'], // vitest
+        default: 'jest'
       }
     ],
     actions: function (answers) {

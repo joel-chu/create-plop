@@ -45,9 +45,15 @@ export default function (
   debug('dest', dest)
   const pkgJsonFile = join(dest, PKG_FILE)
   const pkgJson = fsx.existsSync(pkgJsonFile) ? fsx.readJsonSync(pkgJsonFile) : {}
-  const config = { dest, pkgJsonFile, pkgJson, tplDir, ourPkgJson, __dirname }
-  // debug('deps', deps)
-  // main
+  const config = {
+    pkgJsonFile,
+    pkgJson,
+    ourPkgJson,
+    tplDir,
+    __dirname,
+    dest,
+    pwd: process.pwd()
+  }
 
   generators.forEach(fn => {
     fn(plop, config)
