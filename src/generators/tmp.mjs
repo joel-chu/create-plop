@@ -1,17 +1,16 @@
 // tmp generator
-import { join } from 'node:path'
-import fsx from 'fs-extra'
-import { extend } from '@jsonql/utils'
 import debugFn from 'debug'
 
-import { USERGUIDE } from '../helpers/constants.mjs'
 import { checkPkgDeps } from '../helpers/check-pkg-deps.mjs'
 import { tmpContinue } from '../plop/prompts.mjs'
+
+import { copyTpl, copyUserGuide } from '../plop/copy-tpl.mjs'
+import { updateProjectPkgJson } from '../plop/update-pkg-action.mjs'
 
 const debug = debugFn('create-plop:tmp-generator')
 // main
 export default function tmpGenerator (plop, config) {
-  const { tplDir, pkgJsonFile, pkgJson, ourPkgJson, dest } = config
+  const { pkgJson } = config
 
   const deps = checkPkgDeps(pkgJson)
   if (deps.vue && deps.vue !== 2) {
@@ -32,20 +31,13 @@ export default function tmpGenerator (plop, config) {
       // copy over the whole folder content
       return [
         async function copyFiles () {
-          return await fsx.copy(join(tplDir, 'vue2'), dest)
+          return await copyTpl('vue2', config)
         },
         async function updatePackageJson () {
-          // create a copy first
-          await fsx.copy(pkgJsonFile, pkgJsonFile.replace('.json', '-org.json'))
-
-          pkgJson.dependencies = extend(pkgJson.dependencies, { plop: ourPkgJson.dependencies.plop })
-          pkgJson.scripts = extend(pkgJson.scripts, { plop: 'plop' })
-
-          return fsx.writeJson(pkgJsonFile, pkgJson, { spaces: 2 })
+          return await updateProjectPkgJson(config)
         },
-        async function copyUserGuide () {
-          return fsx.copy(join(tplDir, USERGUIDE), join(dest, USERGUIDE))
-            .then(() => 'All done! Just run `npm run plop`')
+        async function copyUserGuideToDest () {
+          return copyUserGuide(config)
         }
       ]
     }
