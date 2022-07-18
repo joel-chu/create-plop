@@ -15,5 +15,5 @@ export const lang = {
     { name: 'Javascript', value: 'js' },
     { name: 'Typescript', value: 'ts' }
   ],
-  default: 'js'
+  default: 'ts'
 }
